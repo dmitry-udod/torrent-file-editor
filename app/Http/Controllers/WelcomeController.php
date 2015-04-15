@@ -1,9 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-use App\Generators\SiteMapGenerator;
-
-class WelcomeController extends Controller {
-
+class WelcomeController extends Controller
+{
 	/**
 	 * Show the application welcome screen to the user.
 	 *
@@ -11,9 +9,7 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		$files = \File::allFiles(app_path() . '/../public' . SiteMapGenerator::SITE_MAPS_DIRECTORY);
-
-		return view('welcome', compact('files'));
+		return view('welcome');
 	}
 
 }

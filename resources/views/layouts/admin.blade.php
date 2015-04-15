@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/favicon.ico">
 
-    <title>@yield('title', 'Redis admin')</title>
+    <title>@yield('title', 'Torrent Editor')</title>
 
     {!! HTML::style('css/bootstrap.min.css') !!}
     {!! HTML::style('css/main.css') !!}
