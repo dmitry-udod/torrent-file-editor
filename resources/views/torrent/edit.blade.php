@@ -4,11 +4,11 @@
     <div class="col-md-6 col-md-offset-3">
         <h4>Torrent</h4>
         <hr>
-        {!! Form::open(['url' => '', 'class' => 'form-horizontal', 'method' => 'post']) !!}
+        {!! Form::open(['url' => route('download_torrent_file', $fileName), 'class' => 'form-horizontal', 'method' => 'post']) !!}
             <div class="form-group">
                 {!! Form::label('file_name', 'File name', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9">
-                    {!! Form::url('file_name', $fileName, ['class' => 'form-control', 'required' => 'required', 'placeholder' => '']) !!}
+                    {!! Form::text('file_name', $fileName, ['class' => 'form-control', 'required' => 'required', 'placeholder' => '']) !!}
                 </div>
             </div>
 
