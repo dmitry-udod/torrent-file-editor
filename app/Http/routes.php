@@ -19,5 +19,6 @@ $this->app->bind('TorrentFile', function()
 Route::get('/', 'WelcomeController@index');
 
 Route::post('upload-torrent-file', ['as' => 'upload_torrent_file', 'uses' => 'UploadController@file']);
+Route::post('upload-torrent-file-from-url', ['as' => 'upload_torrent_file_from_url', 'uses' => 'UploadController@fileFromUrl']);
 Route::get('edit-torrent-file/{fileName}', ['as' => 'edit_torrent_file', 'uses' => 'TorrentFileController@edit']);
 Route::post('edit-torrent-file/{fileName}', ['as' => 'download_torrent_file', 'uses' => 'TorrentFileController@updateAndDownload']);
