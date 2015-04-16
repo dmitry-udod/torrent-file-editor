@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+
+Route::post('upload-torrent-file', ['as' => 'upload_torrent_file', 'uses' => 'UploadController@file']);
+Route::get('edit-torrent-file/{fileName}', ['as' => 'edit_torrent_file', 'uses' => 'TorrentFileController@edit']);

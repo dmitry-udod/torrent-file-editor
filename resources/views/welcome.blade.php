@@ -15,11 +15,11 @@
     {!! Form::close() !!}
 
     <!-- Upload Form -->
-    {!! Form::open(['url' => '', 'class' => 'form-horizontal', 'method' => 'post']) !!}
+    {!! Form::open(['url' => route('upload_torrent_file'), 'class' => 'form-horizontal', 'method' => 'post', 'files' => 'true']) !!}
         <div class="form-group">
-            {!! Form::label('local_file', 'From File', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('torrent_file', 'From File', ['class' => 'col-sm-2 control-label']) !!}
             <div class="col-sm-3">
-                {!! Form::file('local_file', ['required' => 'required']) !!}
+                {!! Form::file('torrent_file', ['required' => 'required']) !!}
             </div>
             <button type="submit" class="btn-sm btn btn-default btn-primary pull-right">Edit</button>
         </div>
