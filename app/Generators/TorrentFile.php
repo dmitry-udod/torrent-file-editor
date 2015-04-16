@@ -17,6 +17,7 @@ class TorrentFile
         $createdAt = Carbon::createFromFormat('Y-m-d H:i:s', $data['created_at']);
         $info = $torrent->getInfo();
         $info['name'] = $data['name'];
+        $info['files'] = $this->generateFiles($data['files']);
         $torrent->setComment($data['comment']);
         $torrent->setCreatedAt($createdAt->timestamp);
         $torrent->setCreatedBy($data['created_by']);
@@ -26,13 +27,37 @@ class TorrentFile
         return $torrent->save($fileName);
     }
 
+    /**
+     * Generate correct announces for update
+     *
+     * @param array $announces
+     * @return array
+     */
     private function generateAnnounces(array $announces)
     {
-        $newAnnounces = [];
+        $correctAnnounces = [];
         foreach ($announces as $key => $announce) {
-            $newAnnounces[$key][] = $announce;
+            $correctAnnounces[$key][] = $announce;
         }
 
-        return $newAnnounces;
+        return $correctAnnounces;
+    }
+
+    /**
+     * Generate correct files array
+     *
+     * @param array $files
+     * @return array
+     */
+    private function generateFiles(array $files)
+    {
+        $correctFiles = [];
+
+        foreach ($files['path'] as $key => $file) {
+            $correctFiles[$key]['length'] = $files['length'][$key];
+            $correctFiles[$key]['path'][] = $files['path'][$key];
+        }
+
+        return $correctFiles;
     }
 }

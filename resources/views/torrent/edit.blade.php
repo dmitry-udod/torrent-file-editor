@@ -77,10 +77,11 @@
             <div class="form-group">
             @foreach($torrent->getFileList() as $file)
                 <div class="col-sm-8">
-                    {!! Form::text('files[]', $file['path'][0], ['class' => 'form-control']) !!}
+                    {!! Form::text('files[path][]', $file['path'][0], ['class' => 'form-control']) !!}
                 </div>
                 <div class="col-sm-3">
                     {!! Form::text('', App\Converter::formatSizeUnits($file['length']), ['class' => 'form-control', 'disabled'=>'disabled']) !!}
+                    {!! Form::hidden('files[length][]', $file['length'], ['class' => 'form-control']) !!}
                 </div>
             @endforeach
             </div>
