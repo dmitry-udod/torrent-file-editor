@@ -26,11 +26,17 @@
 
             <div class="form-group">
                 {!! Form::label('announces', 'URL', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-9">
-                    @foreach($torrent->getAnnounceList() as $announce)
+                <div class="col-sm-9" id="announces">
+                    @foreach($torrent->getAnnounceList() as $key => $announce)
+                    <div id="announce{{ $key }}">
+                    <span data-remove-id="announce{{ $key }}" class="remove pull-right glyphicon glyphicon-remove" style="position: relative;top: 25px; left: 25px; cursor: pointer"></span>
                     {!! Form::text('announces[]', $announce[0], ['class' => 'form-control']) !!}
+                    </div>
                     @endforeach
                 </div>
+            </div>
+            <div class="form-group">
+                <a href="#" id="addAnnounce" class="btn-sm btn-primary pull-right" style="margin-right: 50px;">Add URL</a>
             </div>
 
             <h4>Meta Data</h4>
