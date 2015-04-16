@@ -5,8 +5,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ url('/') }}">Main</a></li>
+                <li class="{{ (Request::is('/') ? 'active' : '') }}"><a href="{{ url('/') }}">Main</a></li>
             </ul>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
+        </div>
+    </div>
 </nav>

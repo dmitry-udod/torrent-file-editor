@@ -10,7 +10,8 @@
 		"guzzlehttp/guzzle": "~5.2",
 		"symfony/dom-crawler": "~2.6",
 		"symfony/css-selector": "~2.6",
-		"roumen/sitemap": "~2.5"
+		"roumen/sitemap": "~2.5",
+		"christeredvartsen/php-bittorrent": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
@@ -45,5 +46,6 @@
 	},
 	"config": {
 		"preferred-install": "dist"
-	}
+	},
+  	"minimum-stability": "dev"
 }

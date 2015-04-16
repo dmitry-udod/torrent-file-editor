@@ -7,6 +7,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadController extends Controller
 {
+    /**
+     * Upload torrent file
+     *
+     * @param UploadFileRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function file(UploadFileRequest $request)
     {
         /** @var UploadedFile $file */
@@ -21,7 +27,5 @@ class UploadController extends Controller
             Log::error('Error cant move file:', [$fileName, $path]);
             return redirect()->back()->withErrors(['error' => "Can't save file"]);
         }
-
-        return view('welcome');
     }
 }
