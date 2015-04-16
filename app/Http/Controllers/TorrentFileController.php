@@ -3,6 +3,7 @@
 use File;
 use Log;
 use Input;
+use App;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use PHP\BitTorrent\Torrent;
 
@@ -28,18 +29,20 @@ class TorrentFileController extends Controller
         return view('torrent.edit', compact('decodedFile', 'torrent', 'fileName'));
     }
 
+    /**
+     * Update and download torrent file
+     *
+     * @param $fileName
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws FileNotFoundException
+     */
     public function updateAndDownload($fileName)
     {
         $fullFileName = $this->getFullFileName($fileName);
         $torrent = Torrent::createFromTorrentFile($fullFileName);
-        $info = $torrent->getInfo();
-        $info['name'] = Input::get('name');
-        $torrent->setInfo($info);
-        $torrent->save($fileName);
-//        $torrent->se
-//        dd($fileName);
-        dd(\Input::all());
-        return response()->download($fileName);
+        App::make('TorrentFile')->update($torrent, Input::all(), $fileName);
+
+        return response()->download($fileName, Input::get('file_name'))->deleteFileAfterSend(true);
     }
 
     /**

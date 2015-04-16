@@ -11,6 +11,11 @@
 |
 */
 
+$this->app->bind('TorrentFile', function()
+{
+    return new \App\Generators\TorrentFile();
+});
+
 Route::get('/', 'WelcomeController@index');
 
 Route::post('upload-torrent-file', ['as' => 'upload_torrent_file', 'uses' => 'UploadController@file']);
