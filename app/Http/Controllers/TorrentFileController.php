@@ -23,8 +23,13 @@ class TorrentFileController extends Controller
     public function edit($fileName)
     {
         $fullFileName = $this->getFullFileName($fileName);
-        $decodedFile =  $this->decoder->decodeFile($fullFileName);
-        $torrent = Torrent::createFromTorrentFile($fullFileName);
+
+        try {
+            $decodedFile =  $this->decoder->decodeFile($fullFileName);
+            $torrent = Torrent::createFromTorrentFile($fullFileName);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => "Can't decode torrent file"]);
+        }
 
         return view('torrent.edit', compact('decodedFile', 'torrent', 'fileName'));
     }

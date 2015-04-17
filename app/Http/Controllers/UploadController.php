@@ -4,6 +4,7 @@ use App\Http\Requests\UploadFileFromUrlRequest;
 use App\Http\Requests\UploadFileRequest;
 use Input;
 use Log;
+use File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadController extends Controller
@@ -32,18 +33,17 @@ class UploadController extends Controller
 
     public function fileFromUrl(UploadFileFromUrlRequest $request)
     {
-        dd(Input::get('url'));
-        /** @var UploadedFile $file */
-        $file = Input::file('torrent_file');
-        $fileName = $file->getClientOriginalName();
+        $contents = file_get_contents(Input::get('url'));
         $path = public_path('uploads');
-        $result = $file->move($path, $fileName);
+        $fileName = uniqid() . '.torrent';
+        $fullFilePath = $path . DIRECTORY_SEPARATOR . $fileName;
+        $result = File::put($fullFilePath, $contents);
 
         if ($result) {
             return redirect()->route('edit_torrent_file', $fileName);
         } else {
-            Log::error('Error cant move file:', [$fileName, $path]);
-            return redirect()->back()->withErrors(['error' => "Can't save file"]);
+            Log::error('Error cant download file:', [$fileName, $path]);
+            return redirect()->back()->withErrors(['error' => "Can't download torrent file"]);
         }
     }
 }
