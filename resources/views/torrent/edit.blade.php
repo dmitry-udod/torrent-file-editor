@@ -70,12 +70,14 @@
                 </div>
             </div>
 
+            @if (!empty($decodedFile['info']['piece length']))
             <div class="form-group">
                 {!! Form::label('comment', 'Piece Length', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9">
                     {!! Form::text('comment', App\Converter::formatSizeUnits($decodedFile['info']['piece length']), ['class' => 'form-control', 'disabled'=>'disabled']) !!}
                 </div>
             </div>
+            @endif
 
             <br>
             <h4>Files</h4>

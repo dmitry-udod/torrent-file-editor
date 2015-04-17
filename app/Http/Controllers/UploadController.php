@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests\UploadFileFromClipboardRequest;
 use App\Http\Requests\UploadFileFromUrlRequest;
 use App\Http\Requests\UploadFileRequest;
 use Input;
@@ -31,6 +32,12 @@ class UploadController extends Controller
         }
     }
 
+    /**
+     * Download remote file
+     *
+     * @param UploadFileFromUrlRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function fileFromUrl(UploadFileFromUrlRequest $request)
     {
         $contents = file_get_contents(Input::get('url'));

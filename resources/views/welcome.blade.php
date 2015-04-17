@@ -8,7 +8,7 @@
         <div class="form-group">
             {!! Form::label('url', 'From URL', ['class' => 'col-sm-2 control-label']) !!}
             <div class="col-sm-9">
-                {!! Form::url('url', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => '']) !!}
+                {!! Form::url('url', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'http://www.ex.ua/torrent/158867370']) !!}
             </div>
             <button type="submit" class="btn-sm btn btn-default btn-primary pull-right">Edit</button>
         </div>
@@ -27,15 +27,17 @@
     {!! Form::close() !!}
 
     <hr>
-    <!-- Clipboard Form -->
-    {!! Form::open(['url' => route('upload_torrent_file'), 'class' => 'form-horizontal', 'method' => 'post', 'files' => 'true']) !!}
-        <div class="form-group">
-            {!! Form::label('torrent_file', 'From Clipboard', ['class' => 'col-sm-2 control-label']) !!}
-            <div class="col-sm-9">
-                {!! Form::textarea('content', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => '']) !!}
-            </div>
-            <button type="submit" class="btn-sm btn btn-default btn-primary pull-right">Edit</button>
-        </div>
-    {!! Form::close() !!}
+
+    <br><br>
+    <h3>Already uploaded files</h3>
+    <hr>
+
+    @foreach(File::files(public_path('uploads')) as $file)
+        <?php $f = str_replace(public_path('uploads') . '/', '', $file); ?>
+        <label class="control-label">{{ $f }}</label>
+        <a href="{{ route('edit_torrent_file', $f) }}" class="btn-sm btn btn-default btn-primary pull-right">Edit</a>
+        <hr>
+    @endforeach
+
 </div>
 @endsection
